@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+
+  <style>
+    a {
+      background-color: orange;
+    }
+
+
+  </style>
+
+
+  <script src="https://djmsf-dev-ed.my.site.com/myFancyWebsite/lightning/lightning.out.js"></script>
+
+  <div id="asdf"></div>
+
+  <script>
+    $Lightning.use("c:mainWrapper",    // name of the Lightning app
+        function() {                  // Callback once framework and app loaded
+            $Lightning.createComponent(
+                "c:main", // top-level component of your app
+                { },                  // attributes to set on the component when created
+                "asdf",   // the DOM location to insert the component
+                function(cmp) {
+                    // callback when component is created and active on the page
+                }
+            );
+        },
+        'https://djmsf-dev-ed.my.site.com/myFancyWebsite'  // Site endpoint
+    );
+</script>
+</html>

@@ -1,0 +1,37 @@
+<template>
+  <template if:true={showGlobeModal}>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_large">
+      <div class="slds-modal__container">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={globeModalTrigger}>
+          <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+            <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Cancel and close</span>
+        </button>
+        <div class="slds-modal__header">
+          <div class="slds-grid slds-grid_align-spread">
+            <div class="slds-col">
+              <h1 id="modal-heading-01" class="slds-float_right slds-modal__title slds-hyphenate">{mapHeader}</h1>
+            </div>
+            <div class="slds-col">
+              <div class="slds-form-element">
+                <label class="slds-checkbox_toggle slds-grid">
+                  <input type="checkbox" onchange={setMapUser}/>
+                  <span class="slds-checkbox_faux_container">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-checkbox_on"></span>
+                    <span class="slds-checkbox_off"></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+          <lightning-map map-markers={mapMarkers} zoom-level={zoomLevel}> </lightning-map>
+        </div>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+  </template>
+</template>
