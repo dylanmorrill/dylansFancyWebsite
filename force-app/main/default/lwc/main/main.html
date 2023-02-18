@@ -1,77 +1,60 @@
 <template>
-
-  <div class="slds-page-header">
-    <div class="slds-page-header__row">
-      <div class="slds-page-header__col-title">
-        <div class="slds-media">
-          <div class="slds-media__figure">
-            <span class="slds-icon_container slds-icon-standard-store">
-              <svg class="slds-icon">
-                <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/standard-sprite/svg/symbols.svg#code_playground"></use>
-              </svg>
-            </span>
-          </div>
-          <div class="slds-media__body">
-            <div class="slds-page-header__name">
-              <div class="slds-page-header__name-title">
-                <h1>
-                  <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">Dylan Morrill</span>
-                </h1>
+  <div if:false={isFormFactorSupported} class="slds-notify_container slds-is-relative">
+    <div class="slds-notify slds-notify_alert slds-alert_warning slds-m-bottom_large" role="alert">
+      <span class="slds-assistive-text">warning</span>
+      <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+          <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#push"></use>
+        </svg>
+      </span>
+      <h2>Can you switch to your phone? I've only developed this for small form factors so far, so it looks gross on desktops.</h2>
+      <lightning-button label="Enter Anyway" icon-name="utility:open" icon-position="right" variant="base"
+        onclick={changeDesktopBypass} class="slds-m-left_x-small"></lightning-button>
+    </div>
+    <img src="https://i.imgur.com/vwFnQHP.jpg" alt="Italian Trulli" style="display: block; margin-left: auto;margin-right: auto;" width="30%">
+  </div>
+  <div if:true={isFormFactorSupported}>
+    <div if:true={wrapper}>
+      <div class="slds-page-header slds-theme_inverse slds-global-header_container">
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-title">
+            <div class="slds-media">
+              <div class="slds-media__body">
+                <div class="slds-page-header__name">
+                  <div class="slds-page-header__name-title">
+                    <h1>
+                      <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">{wrapper.dev.Name}</span>
+                    </h1>
+                  </div>
+                </div>
+                <p class="slds-page-header__name-meta">{wrapper.dev.Where_I_Work_Title__c} @ {wrapper.dev.Where_I_Work__c}</p>
               </div>
             </div>
-            <p class="slds-page-header__name-meta">Salesforce Engineer • Meta • 6 years exp</p>
+          </div>
+          <div class="slds-page-header__col-actions">
+            <div class="slds-page-header__controls">
+              <div class="slds-page-header__control">
+                <img src={logoImage} onclick={changeLogoImage} height="50px" width="50px">
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="slds-page-header__col-actions">
-        <div class="slds-page-header__controls">
-          <div class="slds-page-header__control">
-            <ul class="slds-button-group-list">
-              <li>
-                <button class="slds-button slds-button_icon" title="Settings" onclick={globeModalTrigger}>
-                  <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
-                    <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#world"></use>
-                  </svg>
-                </button>
-                <button class="slds-button slds-button_icon" title="Settings">
-                  <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
-                    <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#email"></use>
-                  </svg>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <article class="slds-card slds-m-around_small">
-    <div class="slds-card__body slds-card__body_inner">
-      <lightning-tabset>
-        <lightning-tab label="Details">
+      <div class="slds-theme_shade" style="padding-top: 78px; padding-bottom: 15px;">
+        <article class="slds-card slds-m-around_small">
+          <div class="slds-card__body slds-card__body_inner">
             <div class="slds-form__row">
               <div class="slds-form__item" role="listitem">
                 <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked">
                   <span class="slds-form-element__label">Name</span>
                   <div class="slds-form-element__control">
-                    <div class="slds-form-element__static">Dylan Morrill</div>
+                    <div class="slds-form-element__static">{wrapper.dev.Name}</div>
                   </div>
                 </div>
                 <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked">
                   <span class="slds-form-element__label">Where am I?</span>
                   <div class="slds-form-element__control">
-                    <div class="slds-form-element__static">West Hartford, CT</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="slds-form__row">
-              <div class="slds-form__item" role="listitem">
-                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked">
-                  <span class="slds-form-element__label">What do I do?</span>
-                  <div class="slds-form-element__control">
-                    <div class="slds-form-element__static">I'm a Self-taught Salesforce developer living in West Hartford, CT. I've been working in the Salesforce ecosystem for about 6 years. Experienced in the VS-Code, SFDX, GitHub deployment lifecycle.
-                    </div>
+                    <span onclick={mapModalHandler} class="slds-text-link">{wrapper.dev.Address_Text__c}</span>
                   </div>
                 </div>
               </div>
@@ -81,182 +64,232 @@
                 <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked">
                   <span class="slds-form-element__label">Where do I work?</span>
                   <div class="slds-form-element__control">
-                    <div class="slds-form-element__static">Meta
-                      <img src="https://i.imgur.com/xQ8ZUCD.jpg" width="24" height="24">
+                    <div class="slds-form-element__static">{wrapper.dev.Where_I_Work__c}
+                      <img src={wrapper.dev.Where_I_Work_Logo__c} width="20" height="20">
                     </div>
                   </div>
                 </div>
                 <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked">
                   <span class="slds-form-element__label">What is my title?</span>
                   <div class="slds-form-element__control">
-                    <div class="slds-form-element__static">Application Engineer</div>
+                    <div class="slds-form-element__static">{wrapper.dev.Where_I_Work_Title__c}</div>
                   </div>
                 </div>
               </div>
             </div>
-
-
-            <lightning-accordion class="example-accordion slds-p-around_none slds-m-around_none"
-                                 active-section-name={activeSections}
-                                 allow-multiple-sections-open>
-                <lightning-accordion-section class="slds-p-around_none slds-m-around_none" name="A" label="Certifications" style="--slds-c-accordion-heading-font-size: 14px">
-
-                  
-
-                  <div class="slds-grid slds-wrap slds-gutters_xx-small">
-                    <template for:each={certs} for:item="cert">
-                      <div key={cert.name} class="slds-col slds-size_1-of-2">
-                        <article class="slds-card slds-theme_shade">
-                          <div class="slds-card__body slds-card__body_inner slds-p-around_xx-small slds-m-horizontal_none slds-m-bottom_x-small slds-m-top_none">
-                            <div class="slds-grid slds-wrap">
-                              <div class="slds-col slds-size_9-of-12">
-                                <b>{cert.name}</b>
-                              </div>
-                              <div class="slds-col slds-size_3-of-12">
-                                <img class="slds-float_right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/1280px-Salesforce.com_logo.svg.png" width="24" height="24">
-                              </div>
-                              <div class="slds-col slds-size_4-of-4">
-                                {cert.date}
-                              </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked">
+                  <span class="slds-form-element__label">What do I do?</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">{wrapper.dev.Where_I_Work_Responsibilities__c}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked">
+                  <span class="slds-form-element__label">Links (opens a new tab)</span>
+                  <div class="slds-form-element__control">
+                  <div class="slds-p-vertical_xx-small">
+                    <lightning-button variant="brand-outline" label="Email"  onclick={emailClicked}></lightning-button>
+                    <lightning-button class="slds-p-left_small" variant="brand-outline" label="GitHub" onclick={goToUrl}           data-url="https://www.github.com/dylanmorrill"></lightning-button>
+                    <lightning-button class="slds-p-left_small" variant="brand-outline" label="LinkedIn" onclick={goToUrl} data-url="https://www.linkedin.com/in/dylansf"></lightning-button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="slds-card slds-m-horizontal_small slds-m-top_none">
+          <div class="slds-card__body slds-card__body_inner slds-m-top_none">
+            <lightning-tabset>
+              <lightning-tab label="Career" class="slds-p-bottom_none slds-m-bottom_none slds-scrollable_y" style="min-height: 500px;">
+                <ul class="slds-timeline slds-p-bottom_none slds-m-bottom_none">
+                  <template for:each={wrapper.careerHistories} for:item="careerHistWrap">
+                    <c-main-career-blade key={careerHistWrap.careerHistory.Id} career-hist-wrap={careerHistWrap}></c-main-career-blade>
+                  </template>
+                </ul>
+              </lightning-tab>
+              <lightning-tab label="Projects" class="slds-p-bottom_none slds-m-bottom_none slds-scrollable_y" style="min-height: 500px;">
+                <div class="slds-grid slds-wrap">
+                  <div class="slds-col slds-size_6-of-12 slds-p-right_xx-small">
+                    <a onclick={navigateToGitHub} data-project="KeyIndicators" class="slds-carousel__panel-action slds-text-link_reset slds-m-bottom_x-small">
+                      <div class="slds-carousel__image">
+                        <img src="https://i.imgur.com/Mm5wILf.png"/>
+                      </div>
+                      <div class="slds-carousel__content">
+                        <h2 class="slds-carousel__content-title">Account Indicators</h2>
+                        <p>LWC that displays alerts for an account and its child accounts</p>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="slds-col slds-size_6-of-12 slds-p-left_xx-small">
+                    <a onclick={navigateToGitHub} data-project="adventOfCode2021__c" class="slds-carousel__panel-action slds-text-link_reset slds-m-bottom_x-small">
+                      <div class="slds-carousel__image">
+                        <img src="https://i.imgur.com/NaoUkTV.png"/>
+                      </div>
+                      <div class="slds-carousel__content">
+                        <h2 class="slds-carousel__content-title">Advent of Code</h2>
+                        <p>Annual coding challange I participated in using 100% Apex</p>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="slds-col slds-size_6-of-12 slds-p-right_xx-small">
+                    <a onclick={navigateToGitHub} data-project="dylansFancyWebsite" class="slds-carousel__panel-action slds-text-link_reset">
+                      <div class="slds-carousel__image">
+                        <img src="https://i.imgur.com/SpGXYWw.jpg"/>
+                      </div>
+                      <div class="slds-carousel__content">
+                        <h2 class="slds-carousel__content-title">This Website</h2>
+                        <p>I designed this website using Lightning Out. It is 100% Salesforce-native</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </lightning-tab>
+              <lightning-tab label="Certifications" class="slds-p-bottom_none slds-m-bottom_none slds-scrollable_y" style="min-height: 500px;">
+                <div class="slds-grid slds-wrap slds-gutters_xx-small">
+                  <template for:each={wrapper.dev.Site_Certs__r} for:item="cert">
+                    <div key={cert.name} class="slds-col slds-size_1-of-2">
+                      <article class="slds-card slds-theme_shade" data-name={cert.Full_Name__c} data-id={cert.Id} data-description={cert.Description__c} onclick={certModalHandler}>
+                        <div class="slds-card__body slds-card__body_inner slds-p-around_x-small slds-m-horizontal_none slds-m-bottom_x-small slds-m-top_none">
+                          <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_9-of-12 slds-m-bottom_x-small">
+                              <b>{cert.Name}</b>
+                            </div>
+                            <div class="slds-col slds-size_3-of-12">
+                              <img class="slds-float_right" src={cert.Image__c} width="24" height="24">
+                            </div>
+                            <div class="slds-col slds-size_4-of-4">
+                              <p>
+                                <lightning-formatted-date-time value={cert.Date_Achieved__c}></lightning-formatted-date-time>
+                              </p>
                             </div>
                           </div>
-                        </article>
+                        </div>
+                      </article>
+                    </div>
+                  </template>
+                </div>
+              </lightning-tab>
+            </lightning-tabset>
+          </div>
+        </article>
+      </div>
+      <template if:true={showCertModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+          <div class="slds-modal__container">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={certModalHandler}>
+              <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+              </svg>
+              <span class="slds-assistive-text">Cancel and close</span>
+            </button>
+            <div class="slds-modal__header">
+              <div class="slds-grid slds-grid_align-spread">
+                <div class="slds-col slds-size_3-of-4 ">
+                  <h1 id="modal-heading-01" class="slds-float_left slds-modal__title slds-hyphenate">{selectedCert.Full_Name__c}</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-4 slds-float_right">
+                  <img class="slds-float_right" src={selectedCert.Image__c} width="36" height="36">
+                </div>
+              </div>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              {selectedCert.Description__c}
+            </div>
+            <div class="slds-modal__footer slds-p-right_x-small slds-p-bottom_small slds-p-top_x-small" >
+              <lightning-button data-url={selectedCert.Description_More_Info__c} label="Open New Tab With More Info" onclick={goToUrl} icon-name="utility:info"></lightning-button>
+            </div>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+      </template>
+      <template if:true={showHeader}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="welcome-mat-106-label" class="slds-modal slds-fade-in-open slds-modal_small">
+          <div class="slds-modal__container">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeWelcomeMat}>
+              <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+              </svg>
+              <span class="slds-assistive-text">Cancel and close</span>
+            </button>
+            <div class="slds-modal__header slds-modal__header_empty"></div>
+            <div class="slds-modal__content" id="welcome-mat-106-content">
+              <div class="slds-welcome-mat">
+                <div class="slds-welcome-mat__content slds-grid">
+                  <div class="slds-welcome-mat__info slds-size_1-of-1">
+                    <div class="slds-welcome-mat__info-content">
+                      <h2 class="slds-welcome-mat__info-title" id="welcome-mat-106-label">Hi! I'm Dylan</h2>
+                      <div class="slds-welcome-mat__info-description slds-text-longform">
+                        <p>I'm a self-taught Salesforce Engineer living in West Hartford, CT. I spent the
+                          last 7 years living and working in
+                          the Boston area (Brighton and then Woburn). I currently work
+                          remote for Meta. This site showcases my work history and some cool projects
+                          I've worked on. If you want to get in touch, click the email icon in the top right.
+                        </p>
                       </div>
-                    </template>
+                    </div>
                   </div>
-
-
-
-
-
-                </lightning-accordion-section>
-        
-                <lightning-accordion-section name="B" label="Education" style="--slds-c-accordion-heading-font-size: 14px">
-
-                </lightning-accordion-section>
-        
-            </lightning-accordion>
-
-
-
-        </lightning-tab>
-        <lightning-tab label="Certs and Education">
-
-
-
-            <lightning-accordion class="example-accordion slds-p-around_none slds-m-around_none"
-                                 active-section-name={activeSections}
-                                 allow-multiple-sections-open>
-                <lightning-accordion-section class="slds-p-around_none slds-m-around_none" name="A" label="Certifications" style="--slds-c-accordion-heading-font-size: 14px">
-
-                  
-
-                  <div class="slds-grid slds-wrap slds-gutters_xx-small">
-                    <template for:each={certs} for:item="cert">
-                      <div key={cert.name} class="slds-col slds-size_1-of-2">
-                        <article class="slds-card slds-theme_shade">
-                          <div class="slds-card__body slds-card__body_inner slds-p-around_xx-small slds-m-horizontal_none slds-m-bottom_x-small slds-m-top_none">
-                            <div class="slds-grid slds-wrap">
-                              <div class="slds-col slds-size_9-of-12">
-                                <b>{cert.name}</b>
-                              </div>
-                              <div class="slds-col slds-size_3-of-12">
-                                <img class="slds-float_right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/1280px-Salesforce.com_logo.svg.png" width="24" height="24">
-                              </div>
-                              <div class="slds-col slds-size_4-of-4">
-                                {cert.date}
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-                    </template>
-                  </div>
-
-
-
-
-
-                </lightning-accordion-section>
-        
-                <lightning-accordion-section name="B" label="Education" style="--slds-c-accordion-heading-font-size: 14px">
-
-                </lightning-accordion-section>
-        
-            </lightning-accordion>
-
-
-
-        </lightning-tab>
-    </lightning-tabset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+      </template>
     </div>
-  </article>
-
-
-
-
-
-
-  <template if:true={showGlobeModal}>
-    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+  </div>
+  <div if:true={showMapModal}>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-id-01" class="slds-modal slds-fade-in-open slds-modal_medium">
       <div class="slds-modal__container">
-        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={globeModalTrigger}>
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={mapModalHandler}>
           <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
             <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
           </svg>
           <span class="slds-assistive-text">Cancel and close</span>
         </button>
-        <div class="slds-modal__header">
-          <div class="slds-grid">
-            <div class="slds-col slds-size_1-of-2">
-              <h1 id="modal-heading-01" class="slds-float_left slds-modal__title slds-hyphenate">{mapHeader}</h1>
+        <div class="slds-modal__content" id="modal-content-id-01">
+          <div class="slds-grid slds-has-coordinates">
+            <div class="slds-map_container">
+              <div class="slds-map">
+                <iframe id="GoogleMapID" title="Google Maps iframe"
+                  src={currentMapMarkerUrl}></iframe>
+              </div>
             </div>
-            <div class="slds-col slds-size_1-of-2 slds-float_right">
-              <lightning-radio-group onchange={handleMapTypeChange}
-              options={mapMarkerOptions}
-              value={mapMarkerContext}
-              type="radio"></lightning-radio-group>
+            <div class="slds-coordinates">
+              <ul class="slds-coordinates__list">
+                
+                <template for:each={mapStuff} for:item="marker">
+                  <li key={marker.addressTitle} class="slds-coordinates__item">
+                    <span class="slds-assistive-text" aria-live="polite"></span>
+                    <button data-title={marker.addressTitle} onclick={changeMapMarker} class="slds-coordinates__item-action slds-button_reset slds-media"
+                      aria-pressed={marker.pressed}>
+                      <span class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
+                          <svg class="slds-icon" aria-hidden="true">
+                            <use xlink:href={marker.iconUrl}></use>
+                          </svg>
+                          <span class="slds-assistive-text">Description of icon when needed</span>
+                        </span>
+                      </span>
+                      <span class="slds-media__body">
+                        <span class="slds-text-link">{marker.addressTitle}</span>
+                        <span>{marker.address}</span>
+                      </span>
+                    </button>
+                  </li>
+                </template>
+              </ul>
             </div>
           </div>
-        </div>
-        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-          <lightning-map map-markers={mapMarkers} zoom-level={mapMarkersZoomLevel}> </lightning-map>
         </div>
       </div>
     </section>
     <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
-  </template>
-  <template if:true={showHeader}>
-     <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="welcome-mat-106-label" class="slds-modal slds-fade-in-open slds-modal_small">
-        <div class="slds-modal__container">
-           <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeWelcomeMat}>
-              <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
-                 <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
-              </svg>
-              <span class="slds-assistive-text">Cancel and close</span>
-           </button>
-           <div class="slds-modal__header slds-modal__header_empty"></div>
-           <div class="slds-modal__content" id="welcome-mat-106-content">
-              <div class="slds-welcome-mat">
-                 <div class="slds-welcome-mat__content slds-grid">
-                    <div class="slds-welcome-mat__info slds-size_1-of-1">
-                       <div class="slds-welcome-mat__info-content">
-                          <h2 class="slds-welcome-mat__info-title" id="welcome-mat-106-label">Hi! I'm Dylan</h2>
-                          <div class="slds-welcome-mat__info-description slds-text-longform">
-                             <p>Self-taught Salesforce developer living in West Hartford, CT. (moved from Boston in 2022).
-                                Been working in the Salesforce ecosystem for about 6 years.
-                                Experienced in the VS-Code, SFDX, GitHub deployment lifecycle.
-                                Interested in Salesforce Developer jobs, especially those with heavy backend Apex logic.
-                                I'm also a certified CPQ Specialist and really enjoy designing solutions using that product.
-                             </p>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </section>
-     <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
-  </template>
+  </div>
 </template>

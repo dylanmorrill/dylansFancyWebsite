@@ -1,76 +1,31 @@
 const CONSTANTS = {
-  mapMarkerHome: 
-    [
-      {
-        description: 'Suburban New England town just west of Hartford, CT',
-        location: 
-        {
-          City: 'West Hartford',
-          Country: 'USA',
-          State: 'Connecticut',
-          Street: '50 S Main St'
-        },
-        title: 'West Hartford, CT'
-      }
-    ],
-  mapMarkerCollege:
-    [
-      {
-        description: 'Small liberal arts school in a quaint New England town',
-        location: 
-        {
-          City: 'Keene',
-          Country: 'USA',
-          State: 'New Hampshire',
-          Street: '229 Main St'
-        },
-        title: 'Keene State College'
-      }
-    ],
-  mapMarkerHometown:
-    [
-      {
-        description: 'Former mill town. Working class when I grew up, but quickly gentrifying',
-        location: 
-        {
-          City: 'Newmarket',
-          Country: 'USA',
-          State: 'New Hampshire',
-          Street: '186 Main St'
-        },
-        title: 'Newmarket, NH'
-      }
-    ],
-  mapMarkerOptions:
-    [
-      { label: 'Home', value: 'home' },
-      { label: 'College', value: 'college' },
-      { label: 'Hometown', value: 'hometown' }
-    ],
-  mapMarkerCollegeTitle: 'Where the fuck did I study',
-  mapMarkerHomeTitle: 'Where the fuck am I?',
-  mapMarkerHometownTitle: 'Where the fuck did I grow up?',
-  certs: [
-    {
-      name: 'Platform Dev 2',
-      date: '09/26/2022'
-    },
-    {
-      name: 'Platform Dev 1',
-      date: '01/10/2019'
-    },
-    {
-      name: 'CPQ Specialist',
-      date: '01/10/2019'
-    },
-    {
-      name: 'App Builder',
-      date: '01/10/2019'
-    },
-    {
-      name: 'Administrator',
-      date: '01/10/2019'
-    }
-  ]
+  logoImages: [
+    'https://i.imgur.com/ZyPSDkH.png',
+    'https://i.imgur.com/cCEpvmL.png',
+    'https://i.imgur.com/q7lMEuQ.png',
+    'https://i.imgur.com/InKK1xH.png',
+    'https://i.imgur.com/jp99ZdI.png'
+  ],
+
+  mapStuff:
+  [ {
+    "urlString" : "https://www.google.com/maps/embed/v1/place?q=50SouthMain%2C%20West%20Hartford%2C%20CT&key=AIzaSyDliLquGXGts9S8YtkWVolSQEJdBL1ZuWc&zoom=6",
+    "pressed" : true,
+    "addressTitle" : "Where I live",
+    "address" : "West Hartford, CT",
+    "iconUrl": 'https://djmsf-dev-ed.my.salesforce.com/_slds/icons/standard-sprite/svg/symbols.svg#household'
+  }, {
+    "urlString" : "https://www.google.com/maps/embed/v1/place?q=Keene%2C%State%2C%College&key=AIzaSyDliLquGXGts9S8YtkWVolSQEJdBL1ZuWc&zoom=6",
+    "pressed" : false,
+    "addressTitle" : "Where I went to school",
+    "address" : "Keene State College - Keene, NH",
+    "iconUrl" : 'https://djmsf-dev-ed.my.salesforce.com/_slds/icons/custom-sprite/svg/symbols.svg#custom55'
+  }, {
+    "urlString" : "https://www.google.com/maps/embed/v1/place?q=Newmarket%2C%NH&key=AIzaSyDliLquGXGts9S8YtkWVolSQEJdBL1ZuWc&zoom=6",
+    "pressed" : false,
+    "addressTitle" : "Where I grew up",
+    "address" :  "Newmarket, NH",
+    "iconUrl" : 'https://djmsf-dev-ed.my.salesforce.com/_slds/icons/standard-sprite/svg/symbols.svg#recipe'
+  }  ]
 };
 export { CONSTANTS };
