@@ -7,57 +7,47 @@ export default class Main extends LightningElement {
   currentMapMarkerUrl;
   error;
   desktopBypass = false;
-  logoImage;
   mapStuff;
   selectedCert;
   showCertModal = false;
+  showGetInTouchModal = false;
   showHeader = !localStorage.getItem('hasClosedHeader');
   showMapModal = false;
   wrapper;
 
-  get isFormFactorSupported() {
-    return formFactorPropertyName == 'Small' || this.desktopBypass;
-  }
+  isFormFactorSupported = () => formFactorPropertyName === 'Small' || this.desktopBypass;
 
-  certModalHandler(event) {
-    if (event.currentTarget.dataset.id) {
-      this.selectedCert = this.wrapper.dev.Site_Certs__r.find(cert => cert.Id == event.currentTarget.dataset.id);
+  certClicked = (event) => {
+    const certId = event.detail;
+    console.log(certId);
+    if (certId) {
+      this.selectedCert = this.wrapper.dev.Site_Certs__r.find(cert => cert.Id === certId);
     }
-    this.showCertModal = !this.showCertModal
+    this.showCertModal = !this.showCertModal;
   }
 
-  changeDesktopBypass() {
-    this.desktopBypass= !this.desktopBypass;
+  changeDesktopBypass = () => {
+    this.desktopBypass = !this.desktopBypass;
   }
 
-  changeLogoImage() {
-    let index = CONSTANTS.logoImages.indexOf(this.logoImage);
-    if (index == 4) {
-      this.logoImage = CONSTANTS.logoImages[0];
-    } else {
-      this.logoImage = CONSTANTS.logoImages[index+1];
-    }
-  }
-
-  changeMapMarker(event) {
-    let title = event.currentTarget.dataset.title;
+  changeMapMarker = (event) => {
+    const title = event.currentTarget.dataset.title;
     for (const marker of CONSTANTS.mapStuff) {
-      if (title == marker.addressTitle) {
-        marker.pressed = true;
-        this.currentMapMarkerUrl = marker.urlString;
-      } else {
-        marker.pressed = false;
-      }
+      marker.pressed = (title === marker.addressTitle);
+      this.currentMapMarkerUrl = marker.pressed ? marker.urlString : this.currentMapMarkerUrl;
     }
   }
 
-  closeWelcomeMat() {
+  closeCertModal = () => {
+    this.showCertModal = !this.showCertModal;
+  }
+
+  closeWelcomeMat = () => {
     this.showHeader = false;
     localStorage.setItem('hasClosedHeader', true);
   }
 
   connectedCallback() {
-    this.logoImage = CONSTANTS.logoImages[0];
     this.mapStuff = CONSTANTS.mapStuff;
     this.currentMapMarkerUrl = this.mapStuff[0].urlString;
     getResumeSiteWrapper()
@@ -69,10 +59,13 @@ export default class Main extends LightningElement {
         });
   }
 
-  emailClicked() {
-    let emailBody = 'Dylan,%0D%0A%0D%0A Who the hell do you think you are? %0D%0A%0D%0A Signed, %0D%0A%0D%0A Website Visitor' +
-      ' from ' + Intl.DateTimeFormat().resolvedOptions().timeZone;
-    window.open(`mailto:dylanjacksonmorrill@gmail.com?body=${emailBody}&subject=Listen here you!` , '_blank');
+  emailClicked = () => {
+    const emailBody = `Dylan,%0D%0A%0D%0A Who the hell do you think you are? %0D%0A%0D%0A Signed, %0D%0A%0D%0A Website Visitor from ${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
+    window.open(`mailto:dylanjacksonmorrill@gmail.com?body=${emailBody}&subject=Listen here you!`, '_blank');
+  }
+
+  getInTouchModalHandler() {
+    this.showGetInTouchModal = !this.showGetInTouchModal;
   }
 
   goToUrl(event) {

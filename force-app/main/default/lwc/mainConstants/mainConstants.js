@@ -1,12 +1,4 @@
 const CONSTANTS = {
-  logoImages: [
-    'https://i.imgur.com/ZyPSDkH.png',
-    'https://i.imgur.com/cCEpvmL.png',
-    'https://i.imgur.com/q7lMEuQ.png',
-    'https://i.imgur.com/InKK1xH.png',
-    'https://i.imgur.com/jp99ZdI.png'
-  ],
-
   mapStuff:
   [ {
     "urlString" : "https://www.google.com/maps/embed/v1/place?q=50SouthMain%2C%20West%20Hartford%2C%20CT&key=AIzaSyDliLquGXGts9S8YtkWVolSQEJdBL1ZuWc&zoom=6",

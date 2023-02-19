@@ -20,9 +20,11 @@ public without sharing class ResumeSiteController {
                      FROM Site_Career_Histories__r
                      ORDER BY Order__c DESC),
                     (SELECT Date_Achieved__c, Image__c, Name, Full_Name__c,
-                    Description__C, Description_More_Info__c
+                            Description__C, Description_More_Info__c
                      FROM Site_Certs__r
-                     ORDER BY Pride_Level__c)
+                     ORDER BY Pride_Level__c),
+                    (SELECT Description__c, Image__c, Name, Url__c
+                     FROM Site_Projects__r)
              FROM Site_Developer_Info__c
              WHERE Name = 'Dylan Morrill'];
 

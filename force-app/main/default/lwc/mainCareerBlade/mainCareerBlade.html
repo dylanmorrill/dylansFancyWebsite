@@ -1,63 +1,40 @@
 <template>
-  <li key={careerHistWrap.careerHistory.Id}>
-    <div class={listClass} data-id="mainBody">
+  <li>
+    <div class="slds-timeline__item_expandable slds-timeline__item_email" data-id="mainBody">
       <div class="slds-media">
         <div class="slds-media__figure">
-
-
-
-          <button data-job={careerHistWrap.careerHistory.Title__c} class="slds-button slds-button_icon slds-m-left_xxx-small" title="Toggle details for Re: Mobile conversation on Monday with the new global team"
+          <button data-job={careerHistWrap.careerHistory.Title__c}
+            class="slds-button slds-button_icon slds-m-left_xxx-small"
             onclick={careerHistorySectionAction}>
             <svg class="slds-button__icon slds-timeline__details-action-icon" aria-hidden="true">
               <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#switch"></use>
             </svg>
-            <span class="slds-assistive-text">Toggle details for Re: Mobile conversation on Monday with the new global team</span>
           </button>
-          <img src={careerHistWrap.careerHistory.Logo__c} height="28px" width="28px">
+          <img src={careerHistWrap.careerHistory.Logo__c} height="28px" width="28px" />
         </div>
         <div class="slds-media__body">
-                <p class="slds-m-horizontal_xx-small">
-                  <strong>{careerHistWrap.careerHistory.Title__c}</strong>
-                </p>
-
+          <p class="slds-m-horizontal_xx-small">
+            <strong>{careerHistWrap.careerHistory.Title__c}</strong>
+          </p>
           <p class="slds-m-horizontal_xx-small">
             {careerHistWrap.careerHistory.Company__c}
           </p>
           <p class="slds-m-horizontal_xx-small">
             {careerHistWrap.careerHistory.Start_Year__c} - {careerHistWrap.careerHistory.End_Year__c}
-
-            <span style="color:#50c474" if:false={careerHistWrap.careerHistory.End_Year__c}>
+            <span style="color: #50c474;" if:false={careerHistWrap.careerHistory.End_Year__c}>
               <span class="slds-icon_container slds-icon-utility-clock slds-current-color" title="Description of icon when needed">
                 <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
                   <use xlink:href="https://djmsf-dev-ed.my.salesforce.com/_slds/icons/utility-sprite/svg/symbols.svg#clock"></use>
                 </svg>
               </span>
             </span>
-
             <span class="slds-p-left_xx-small">({careerHistWrap.timeFrameString})</span>
-
           </p>
-          <p if:true={showCareerDescription}  class="slds-m-horizontal_xx-small slds-p-top_small">
+          <p if:true={showCareerDescription} class="slds-m-horizontal_xx-small slds-p-top_small">
             {careerHistWrap.careerHistory.Description_Short__c}
           </p>
-
-         <!-- <article if:true={showCareerDescription} class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small
-            slds-p-around_xxx-small aria-hidden=false">
-            <p>{careerHistWrap.careerHistory.Description_Short__c}</p>
-
-
-          </article>-->
-
-
-
-
         </div>
       </div>
     </div>
   </li>
-
-
-
-
-
 </template>

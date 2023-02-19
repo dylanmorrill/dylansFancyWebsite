@@ -1,3 +1,6 @@
-.sample:focus {
-  width:200px;
+[data-style="mainBody"] {
+  padding-top: 72px; padding-bottom: 15px;
+}
+[data-style="bottomTab"] {
+  min-height: 500px;
 }
