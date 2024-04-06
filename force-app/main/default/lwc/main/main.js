@@ -6,28 +6,25 @@ import formFactorPropertyName from '@salesforce/client/formFactor'
 export default class Main extends LightningElement {
   currentMapMarkerUrl;
   error;
-  desktopBypass = false;
   mapStuff;
   selectedCert;
   showCertModal = false;
   showGetInTouchModal = false;
   showHeader = !localStorage.getItem('hasClosedHeader');
+  showHelpfulLinks = false;
   showMapModal = false;
   wrapper;
 
-  isFormFactorSupported = () => formFactorPropertyName === 'Small' || this.desktopBypass;
+  get isFormFactorSupported() {
+    return formFactorPropertyName === 'Small';
+  }
 
   certClicked = (event) => {
     const certId = event.detail;
-    console.log(certId);
     if (certId) {
       this.selectedCert = this.wrapper.dev.Site_Certs__r.find(cert => cert.Id === certId);
     }
     this.showCertModal = !this.showCertModal;
-  }
-
-  changeDesktopBypass = () => {
-    this.desktopBypass = !this.desktopBypass;
   }
 
   changeMapMarker = (event) => {
@@ -50,7 +47,7 @@ export default class Main extends LightningElement {
   connectedCallback() {
     this.mapStuff = CONSTANTS.mapStuff;
     this.currentMapMarkerUrl = this.mapStuff[0].urlString;
-    getResumeSiteWrapper()
+    getResumeSiteWrapper({timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, form: formFactorPropertyName, userAgent: navigator.userAgent})
         .then(result => {
             this.wrapper = result;
         })
@@ -69,7 +66,14 @@ export default class Main extends LightningElement {
   }
 
   goToUrl(event) {
-    window.open(event.currentTarget.dataset.url);
+    let url = event.currentTarget.dataset.url;
+    if (!url) {
+      url = `mailto:dylanjacksonmorrill@gmail.com`;
+    }
+  }
+
+  helpfulLinksHandler() {
+    this.showHelpfulLinks = !this.showHelpfulLinks;
   }
 
   mapModalHandler() {

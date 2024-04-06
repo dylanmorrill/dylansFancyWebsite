@@ -1,6 +1,12 @@
 [data-style="mainBody"] {
   padding-top: 72px; padding-bottom: 15px;
 }
+[data-style="mainBodyDesktop"] {
+  padding-top: 84px; padding-bottom: 15px;
+}
 [data-style="bottomTab"] {
   min-height: 500px;
+}
+[data-style="bottomTabDesktop"] {
+  min-height: 250px;
 }
