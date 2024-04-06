@@ -70,6 +70,7 @@ export default class Main extends LightningElement {
     if (!url) {
       url = `mailto:dylanjacksonmorrill@gmail.com`;
     }
+    window.open(url, '_blank');
   }
 
   helpfulLinksHandler() {
