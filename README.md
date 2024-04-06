@@ -1,1 +1,1 @@
-# This website is a work in progress. As of April, 2024, the code is still in an embarrassingly unpolished state. The website uses LWCs hosted on my developer edition org and renders them using Lightning Out.
+# ⚠ This website is a work in progress. As of April, 2024, the code is still in an embarrassingly unpolished state. The website uses LWCs hosted on my developer edition org and renders them using Lightning Out. ⚠
